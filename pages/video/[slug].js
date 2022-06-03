@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { GraphQLClient, gql } from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 import NavBar from "../../components/Layout/NavBar/NavBar";
 import playButton from "../../public/play-button.png";
 import Button from "../../components/UI/Button";
+import { slugQuery } from "../../Services/constants";
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug;
@@ -13,29 +14,10 @@ export const getServerSideProps = async (pageContext) => {
       authorization: process.env.GRAPHQL_API_TOKEN,
     },
   });
-  const query = gql`
-    query ($pageSlug: String!) {
-      video(where: { slug: $pageSlug }) {
-        createdAt
-        id
-        title
-        description
-        tags
-        seen
-        slug
-        thumbnail {
-          url
-        }
-        mp4 {
-          url
-        }
-      }
-    }
-  `;
   const variables = {
     pageSlug,
   };
-  const data = await gqlClient.request(query, variables);
+  const data = await gqlClient.request(slugQuery, variables);
   const video = data.video;
   return {
     props: {
@@ -44,18 +26,30 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
+const changeToSeen = async (slug) => {
+  await fetch("/api/changeToSeen", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ slug }),
+  });
+};
+
 const Video = ({ video }) => {
   const [watching, setWatching] = useState(false);
+
+  const videoPlayHandler = () => {
+    changeToSeen(video.slug);
+    setWatching(true);
+  };
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="video-page">
         {!watching ? (
           <>
-            <div
-              className="video-image-container"
-              onClick={() => setWatching(true)}
-            >
+            <div className="video-image-container" onClick={videoPlayHandler}>
               <img
                 className="video-image"
                 src={video.thumbnail.url}
@@ -63,7 +57,7 @@ const Video = ({ video }) => {
               />
             </div>
 
-            <div className="play-button" onClick={() => setWatching(true)}>
+            <div className="play-button" onClick={videoPlayHandler}>
               <Image
                 src={playButton}
                 alt="play button"
@@ -90,9 +84,9 @@ const Video = ({ video }) => {
               .join(" • ")}
           </p>
           <p className="video-description">{video.description}</p>
-          <Button>
-            <Link href="/">Back</Link>
-          </Button>
+          <a href="/">
+            <Button>Back</Button>
+          </a>
         </div>
       </div>
     </>

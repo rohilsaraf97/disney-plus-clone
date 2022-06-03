@@ -22,6 +22,8 @@ a {
 
 .app {
   margin: 28px;
+  margin-top: 100px;
+  z-index: 0;
 }
 
 .button {
@@ -83,9 +85,32 @@ div::-webkit-scrollbar {
 /* navigation bar */
 
 .navbar {
+  position: fixed;
+  top: 0;
+  padding: 0 10px;
+  background-color: #090e25;
   height: 80px;
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.navbar .account-details img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.account-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  height: 50%;
+  margin: 20px;
 }
 
 /* video */
@@ -143,4 +168,20 @@ div::-webkit-scrollbar {
 .video-page {
   display: flex;
   flex-direction: column;
+}
+
+/* franchises */
+
+.franchises {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.franchises .franchise {
+  width: 18vw;
+  background-color: #1e2841;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
 }

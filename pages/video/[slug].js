@@ -84,9 +84,11 @@ const Video = ({ video }) => {
               .join(" • ")}
           </p>
           <p className="video-description">{video.description}</p>
-          <a href="/">
-            <Button>Back</Button>
-          </a>
+          <Link href="/">
+            <a>
+              <Button>Back</Button>
+            </a>
+          </Link>
         </div>
       </div>
     </>

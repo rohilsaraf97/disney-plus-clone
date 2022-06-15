@@ -1,9 +1,8 @@
-import React from "react";
 import { GraphQLClient } from "graphql-request";
 import Sections from "../components/Layout/Sections/Sections";
 import NavBar from "../components/Layout/NavBar/NavBar";
 import MainVideo from "../components/Layout/MainVideo";
-import { accountQuery, videoQuery } from "../Services/constants";
+import { accountQuery, videoQuery } from "../services/constants";
 import Franchises from "../components/Layout/Franchises/Franchises";
 
 export const getStaticProps = async () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "../../UI/Card";
 
 const Section = ({ genre, videos }) => {

@@ -1,6 +1,5 @@
-import React from "react";
 import Franchise from "./Franchise";
-import { franchises } from "../../../Services/constants";
+import { franchises } from "../../../services/constants";
 
 const Franchises = () => {
   return (

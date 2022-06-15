@@ -1,9 +1,8 @@
-import React from "react";
 import Section from "./Section";
 import {
   getUnseenVideos,
   filterVideosBasedOnGenre,
-} from "../../../Services/utils";
+} from "../../../services/utils";
 
 const Sections = ({ videos }) => {
   return (

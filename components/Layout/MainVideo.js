@@ -1,5 +1,3 @@
-import React from "react";
-
 const MainVideo = ({ randomVideo }) => {
   return (
     <div className="main-video">

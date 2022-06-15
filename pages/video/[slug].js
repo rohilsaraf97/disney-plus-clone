@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { GraphQLClient } from "graphql-request";
 import NavBar from "../../components/Layout/NavBar/NavBar";
 import playButton from "../../public/play-button.png";
 import Button from "../../components/UI/Button";
-import { slugQuery } from "../../Services/constants";
+import { slugQuery } from "../../services/constants";
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug;
